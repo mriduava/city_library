@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CityLibrary {
@@ -145,10 +146,10 @@ public class CityLibrary {
 
     //TO ADD & DISPLAY BOOKS
     public void displayBooks(){
-        Book emil = new Book("Emil", "Astrid Lindgren", 2);
-        Book matilda = new Book("Matilda", "Roald Dahl", 3);
-        Book whiteTiger = new Book("White Tiger", "Aravind Adiga", 0);
-        Book skuld = new Book("Skuld", "Karin Alvtegen", 1);
+        Book emil = new Book("Emil", "Astrid Lindgren", 2, 0.0f);
+        Book matilda = new Book("Matilda", "Roald Dahl", 3, 0.0f);
+        Book whiteTiger = new Book("White Tiger", "Aravind Adiga", 0, 0.0f);
+        Book skuld = new Book("Skuld", "Karin Alvtegen", 1, 0.0f);
 
         books.add(emil);
         books.add(matilda);
@@ -161,6 +162,7 @@ public class CityLibrary {
         Scanner input = new Scanner(System.in);
         String title, author;
         int quantity;
+        float rating = 0.0f;
         System.out.println("Book's Title: ");
         title = input.nextLine();
 
@@ -174,7 +176,7 @@ public class CityLibrary {
             if (input2.hasNextInt()){
                 isNumber=true;
                 quantity = input2.nextInt();
-                Book bookInfo = new Book(title, author, quantity);
+                Book bookInfo = new Book(title, author, quantity, rating);
                 books.add(bookInfo);
                 System.out.println(title.toUpperCase() + " has been successfully added.");
                 FileUtility.writeBooksList("booksList.ser", books);
@@ -204,6 +206,7 @@ public class CityLibrary {
         for (Book books: books){
             System.out.println("Title   : " + books.getTitle().toUpperCase() +
                     "\nAuthor  : " + books.getAuthor().toUpperCase() +
+                    "\nAvg Rate: " + books.getRating() +
                     "\nQuantity: " + books.getQuantity() +
                     "\n-----------------------");
         }
@@ -294,7 +297,7 @@ public class CityLibrary {
                 for (Book book: books){
                     if ((book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())) && (book.getQuantity() > 0)){
                         foundBook = true;
-                        ReservedBook reservedBook = new ReservedBook(name, book.getTitle(), book.getAuthor(), book.getQuantity());
+                        ReservedBook reservedBook = new ReservedBook(name, book.getTitle(), book.getAuthor(), book.getQuantity(), book.getRating());
                         if (!existBook(reservedBook)){
                             reservedBooks.add(reservedBook);
                             System.out.println(bookTitle.toUpperCase() + " is now reserved!\n");
@@ -362,6 +365,24 @@ public class CityLibrary {
                         for (Book book: books) {
                             if (book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())){
                                 book.setQuantity(book.getQuantity() + 1);
+
+                                Scanner input2 = new Scanner(System.in).useLocale(Locale.US);
+                                System.out.println("PLease rate the book (Optional)" +
+                                                   "\nEnter number 0.0 - 5.0");
+
+                                float rate = input2.nextFloat();
+                                input2.nextLine();
+
+                                String rate2 = String.valueOf(rate);
+                                if (rate == 0){
+                                    input2.close();
+                                    return;
+                                }else if (rate <0.1 || rate > 5.0){
+                                    System.out.println("Enter a number 0.1 - 5.0");
+                                }else {
+                                    System.out.println(avgRating(rate));
+                                    book.setRating(avgRating(rate));
+                                }
                             }
                         }
                         System.out.println(reservedBook.getTitle().toUpperCase() + " has been canceled.");
@@ -369,7 +390,7 @@ public class CityLibrary {
                 }
             }
         }catch (Exception e){
-            System.out.println(e);
+            //System.out.println(e);
         }
         if (!found){
             System.out.println("Subscriber not found.");
@@ -394,6 +415,18 @@ public class CityLibrary {
             }
         }
         return false;
+    }
+
+    //CALCULATE AVERAGE RATING
+    private ArrayList<Float> rate = new ArrayList<>();
+    public float avgRating(float num){
+        rate.add(num);
+        float total = 0.0f;
+        for (float r: rate){
+            total += r;
+        }
+        float avgRate = total/(float) rate.size();
+        return avgRate;
     }
 
 }

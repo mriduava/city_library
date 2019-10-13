@@ -12,11 +12,13 @@ public class Book implements Comparable<Book>, Serializable {
     }
 
     private String title, author;
-    private int quantity = 0;
-    public Book(String title, String author, int quantity){
+    private int quantity;
+    private float rating;
+    public Book(String title, String author, int quantity, float rating){
         this.title = title;
         this.author = author;
-        this.quantity += quantity;
+        this.quantity = quantity;
+        this.rating = rating;
     }
 
     public String getTitle() {
@@ -33,6 +35,14 @@ public class Book implements Comparable<Book>, Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     //SORT BOOKS PART 1
@@ -56,5 +66,4 @@ public class Book implements Comparable<Book>, Serializable {
                 "\nQuantity: " + quantity +
                 "\n-----------------------";
     }
-
 }
