@@ -367,22 +367,19 @@ public class CityLibrary {
                                 book.setQuantity(book.getQuantity() + 1);
 
                                 Scanner input2 = new Scanner(System.in).useLocale(Locale.US);
-                                System.out.println("PLease rate the book (Optional)" +
-                                                   "\nEnter number 0.0 - 5.0");
-
-                                float rate = input2.nextFloat();
-                                input2.nextLine();
-
-                                String rate2 = String.valueOf(rate);
-                                if (rate == 0){
-                                    input2.close();
-                                    return;
-                                }else if (rate <0.1 || rate > 5.0){
-                                    System.out.println("Enter a number 0.1 - 5.0");
-                                }else {
-                                    System.out.println(avgRating(rate));
-                                    book.setRating(avgRating(rate));
-                                }
+                                boolean isFLoatNumber;
+                                do{
+                                    System.out.println("Rate the book (Optional)" +
+                                                       "\nEnter a number 0.1 - 5.0");
+                                    if (input2.hasNextFloat()){
+                                        isFLoatNumber=true;
+                                        float rate = input2.nextFloat();
+                                        book.setRating(avgRating(rate));
+                                    }else {
+                                        isFLoatNumber = false;
+                                        input2.next();
+                                    }
+                                }while (!(isFLoatNumber));
                             }
                         }
                         System.out.println(reservedBook.getTitle().toUpperCase() + " has been canceled.");
