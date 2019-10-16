@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class CityLibrary {
 
@@ -179,7 +176,10 @@ public class CityLibrary {
                 Book bookInfo = new Book(title, author, quantity, rating);
                 books.add(bookInfo);
                 System.out.println(title.toUpperCase() + " has been successfully added.");
-                FileUtility.writeBooksList("booksList.ser", books);
+
+                //FileUtility.writeBooksList("booksList.ser", books);
+               // FileUtility.saveObject("books.ser", books);
+
             }else {
                 System.out.println("Please write a number...");
                 isNumber = false;
@@ -213,6 +213,8 @@ public class CityLibrary {
         //SHOW BOOKS FROM FILE
         /*ArrayList<Book> booksFile = (ArrayList<Book>)FileUtility.readBooksList("booksList.ser");
         System.out.println(booksFile.toString().replace("[", "").replace("]", ""));*/
+
+        //List<Book> students = (List<Book>)FileUtility.loadObject("books.ser");
     }
 
     //SORT BOOKS PART 3
@@ -306,7 +308,6 @@ public class CityLibrary {
                         }else{
                             System.out.println("You have already reserved this book.");
                         }
-
                     } else if ((book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())) && (book.getQuantity() == 0)){
                         foundBook = true;
                         System.out.println("Sorry, this book is not available to reserve.");
@@ -353,43 +354,53 @@ public class CityLibrary {
         System.out.println("YOUR NAME: ");
         String subscriberName = input.nextLine();
 
-        boolean found = false;
+        boolean foundSubscriber = false;
+        boolean foundBook = false;
         try {
             for (ReservedBook reservedBook: reservedBooks){
                 if ((reservedBook.getName().toLowerCase()).equals(subscriberName.toLowerCase())) {
-                    found = true;
+                    foundSubscriber = true;
                     System.out.println("BOOK TITLE: ");
                     String bookTitle = input.nextLine();
                     if ((reservedBook.getTitle().toLowerCase()).equals(bookTitle.toLowerCase())) {
+                        foundBook = true;
                         reservedBooks.remove(reservedBook);
                         for (Book book: books) {
                             if (book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())){
                                 book.setQuantity(book.getQuantity() + 1);
 
                                 Scanner input2 = new Scanner(System.in).useLocale(Locale.US);
-                                boolean isFLoatNumber;
-                                do{
-                                    System.out.println("Rate the book (Optional)" +
-                                                       "\nEnter a number 0.1 - 5.0");
-                                    if (input2.hasNextFloat()){
-                                        isFLoatNumber=true;
-                                        float rate = input2.nextFloat();
-                                        book.setRating(avgRating(rate));
-                                    }else {
-                                        isFLoatNumber = false;
-                                        input2.next();
+                                System.out.println("Rate the book (Optional)" +
+                                                   "\nEnter a number 0.1 - 5.0");
+                                    String str = input2.nextLine();
+                                    if(str.isEmpty()){
+                                        System.out.println("You've skipped rating.");
+                                        break;
+                                    } else {
+                                        float rate = Float.parseFloat(str);
+                                        if (rate > 0 && rate <=5){
+                                            book.setRating(avgRating(rate));
+                                            System.out.println("Thanks for rating.");
+                                            break;
+                                        }else {
+                                            System.out.println("No rating added for out of limit.");
+                                            break;
+                                        }
                                     }
-                                }while (!(isFLoatNumber));
                             }
                         }
                         System.out.println(reservedBook.getTitle().toUpperCase() + " has been canceled.");
+                    } else if(!foundBook) {
+                        System.out.println("Yod did not reserve this book.");
+                        break;
                     }
                 }
             }
         }catch (Exception e){
             //System.out.println(e);
         }
-        if (!found){
+
+        if (!foundSubscriber){
             System.out.println("Subscriber not found.");
         }
     }

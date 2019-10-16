@@ -7,9 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="640c3470-2dbc-4b40-8267-fa3aeb37a454" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/CityLibrary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/CityLibrary.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/CityLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/CityLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/FileUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/FileUtility.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
