@@ -15,7 +15,7 @@ public class CityLibrary {
         this.libraryName = libraryName;
     }
 
-    Scanner scan = new Scanner(System.in);
+    /*Scanner scan = new Scanner(System.in);
     public void promptMenu() {
         System.out.println("====================================\n" +
                            "   WELCOME TO " + libraryName);
@@ -101,9 +101,53 @@ public class CityLibrary {
             }
 
         } while (!((input.equals("10")) || (input.equalsIgnoreCase("exit"))));
+    }*/
+
+    
+    public void promptMenu() {
+        System.out.println("====================================\n" +
+                "   WELCOME TO " + libraryName);
+        //To add books in array & to display
+        displayBooks();
+
+        MainMenu.MenuItems menuItems;
+        do {
+            menuItems = MainMenu.showMenuAndGetChoice();
+            switch (menuItems) {
+                case ADMIN_LOGIN_REG:
+                    addLibrarian();
+                    break;
+                case ADD_BOOKS:
+                    addBook();
+                    break;
+                case SHOW_BOOKS:
+                    showBooks();
+                    break;
+                case SORT_BOOKS:
+                    sortBooks();
+                    break;
+                case SUBSCRIBER_REGISTRATION:
+                    addSubscriber();
+                    break;
+                case BORROW_BOOK:
+                    reserveBook();
+                    break;
+                case MY_BORROWED_BOOKS:
+                    break;
+                case RETURN_BOOK:
+                    cancelReservation();
+                    break;
+                case ALL_BORROWED_BOOKS:
+                    showAllReservedBooks();
+                    break;
+                case EXIT:
+                    System.out.println("PROGRAM IS SHUTTING DOWN");
+                    break;
+            }
+        } while (menuItems != menuItems.EXIT);
     }
 
-
+     
     //ADD LIBRARIAN
     public void addLibrarian(){
         Scanner scan = new Scanner(System.in);

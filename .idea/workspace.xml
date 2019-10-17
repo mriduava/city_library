@@ -7,11 +7,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="640c3470-2dbc-4b40-8267-fa3aeb37a454" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/booksList.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CityLibrary_jar/library.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/META-INF/CityLibrary.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Book$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Book$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Book$SortBy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Book$SortBy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Book.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Book.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/CityLibrary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/CityLibrary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/FileUtility.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/FileUtility.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Librarian.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Librarian.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/ReservedBook.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/ReservedBook.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Subscriber.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Subscriber.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Library/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/CityLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/CityLibrary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/FileUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/FileUtility.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +37,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -30,7 +46,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1R6tzCzgDZn2X7CqLbuDsab4KnF" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
