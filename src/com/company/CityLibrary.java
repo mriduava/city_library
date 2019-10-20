@@ -1,12 +1,12 @@
 package com.company;
 
-import java.text.DecimalFormat;
 import java.util.*;
 
-public class CityLibrary {
+public class CityLibrary<T> {
 
     private static final int MAX_LIBRARIANS = 2;
     private ArrayList<Admin> admins = new ArrayList<>(MAX_LIBRARIANS);
+
     private ArrayList<Subscriber> subscribers = new ArrayList<>();
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<BorrowedBook> borrowedBooks = new ArrayList<>();
@@ -165,7 +165,7 @@ public class CityLibrary {
     public void displayBooks(){
         Book emil = new Book("Emil", "Astrid Lindgren", 2, 0.0f);
         Book matilda = new Book("Matilda", "Roald Dahl", 3, 0.0f);
-        Book whiteTiger = new Book("White Tiger", "Aravind Adiga", 0, 0.0f);
+        Book whiteTiger = new Book("Ladies Coupe", "Anita Nair", 0, 0.0f);
         Book skuld = new Book("Skuld", "Karin Alvtegen", 1, 0.0f);
 
         books.add(emil);
@@ -406,36 +406,42 @@ public class CityLibrary {
                     foundSubscriber = true;
                     System.out.println("BOOK TITLE: ");
                     String bookTitle = input.nextLine();
-                    if ((borrowedBook.getTitle().toLowerCase()).equals(bookTitle.toLowerCase())) {
-                        foundBook = true;
-                        borrowedBooks.remove(borrowedBook);
-                        for (Book book: books) {
-                            if (book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())){
-                                book.setQuantity(book.getQuantity() + 1);
 
-                                Scanner input2 = new Scanner(System.in).useLocale(Locale.US);
-                                System.out.println("Rate the book (Optional)" +
-                                                   "\nEnter a number 0.1 - 5.0");
+                    for (BorrowedBook borrowedBook2 : borrowedBooks) {
+                        if ((borrowedBook2.getName().toLowerCase()).equals(subscriberName.toLowerCase()) && bookTitle.toLowerCase().equals(borrowedBook2.getTitle().toLowerCase())) {
+                            borrowedBooks.remove(borrowedBook2);
+                            System.out.println(bookTitle.toUpperCase() + " has been canceled.");
+                            foundBook = true;
+                            for (Book book : books) {
+                                if (book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())) {
+                                    book.setQuantity(book.getQuantity() + 1);
+
+                                    Scanner input2 = new Scanner(System.in).useLocale(Locale.US);
+                                    System.out.println("Rate the book (Optional)" +
+                                            "\nEnter a number 0.1 - 5.0");
                                     String str = input2.nextLine();
-                                    if(str.isEmpty()){
+                                    if (str.isEmpty()) {
                                         System.out.println("You've skipped rating.");
                                         break;
                                     } else {
                                         float rate = Float.parseFloat(str);
-                                        if (rate > 0 && rate <=5){
+                                        if (rate > 0 && rate <= 5) {
                                             book.setRating(avgRating(rate));
                                             System.out.println("Thanks for rating.");
                                             break;
-                                        }else {
+                                        } else {
                                             System.out.println("No rating added for out of limit.");
                                             break;
                                         }
                                     }
+                                }
                             }
+                            break;
                         }
-                        System.out.println(borrowedBook.getTitle().toUpperCase() + " has been canceled.");
-                    } else if(!foundBook) {
-                        System.out.println("Yod did not borrowed this book.");
+
+                    }
+                    if (!foundBook){
+                        System.out.println("Yod did not borrow this book.");
                         break;
                     }
                 }

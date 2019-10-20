@@ -8,13 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="640c3470-2dbc-4b40-8267-fa3aeb37a454" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/CityLibrary$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/CityLibrary$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/CityLibrary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CityLibrary/com/company/CityLibrary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/Librarian.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CityLibrary/com/company/ReservedBook.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/CityLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/CityLibrary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Librarian.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ReservedBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/BorrowedBook.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
