@@ -2,10 +2,20 @@ package com.company;
 
 import java.util.*;
 
-public class CityLibrary<T> {
+/**
+ * <h1>Library Program</h1>
+ * <p>Admin and Subscribers as User
+ * where Admin can add Books and Subscriber
+ * can Borrow or Return Books from Library</p>
+ * @author Maruf Ahmed
+ * @version 1.0.0
+ * @since 2019.10.16
+ */
 
-    private static final int MAX_LIBRARIANS = 2;
-    private ArrayList<Admin> admins = new ArrayList<>(MAX_LIBRARIANS);
+public class CityLibrary{
+
+    private static final int MAX_ADMINS = 2;
+    private ArrayList<Admin> admins = new ArrayList<>(MAX_ADMINS);
 
     private ArrayList<Subscriber> subscribers = new ArrayList<>();
     private ArrayList<Book> books = new ArrayList<>();
@@ -121,8 +131,11 @@ public class CityLibrary<T> {
         } while (menuItems != menuItems.EXIT);
     }
 
-     
-    //ADD ADMIN
+
+    /**
+     * Function to register Admin
+     * Max 2 Admin can be added as MAX_ADMINS=2
+     */
     public void registerAdmin(){
         System.out.println("ADMIN LOGIN/REGISTRATION" +
                          "\n========================");
@@ -139,7 +152,7 @@ public class CityLibrary<T> {
                 isNumber = true;
                 int id2 = Integer.valueOf(id);
                 Admin adminInfo = new Admin(name, id2);
-                if (admins.size()== MAX_LIBRARIANS){
+                if (admins.size()== MAX_ADMINS){
                     System.out.println("Admin's position is full");
                 }else {
                     admins.add(adminInfo);
@@ -152,7 +165,10 @@ public class CityLibrary<T> {
         }while (!(isNumber));
     }
 
-    //SHOW ADMINS
+    /**
+     * Not using this function
+     * Just to check if "registerAdmin works or not
+     */
     public void showAdmins(){
         for (int i = 0; i< admins.size(); i++){
             System.out.println("Name: " + admins.get(i).getName().toUpperCase() +
@@ -161,7 +177,10 @@ public class CityLibrary<T> {
         }
     }
 
-    //TO ADD & DISPLAY BOOKS
+    /**
+     * It will add Books to the books array
+     * This function will run before the display of Menuitems
+     */
     public void displayBooks(){
         Book emil = new Book("Emil", "Astrid Lindgren", 2, 0.0f);
         Book matilda = new Book("Matilda", "Roald Dahl", 3, 0.0f);
@@ -174,7 +193,9 @@ public class CityLibrary<T> {
         books.add(skuld);
     }
 
-    //ADD BOOK PART 1
+    /**
+     * To create book object and to add in the books array
+     */
     private void generateBookInfo(){
         Scanner input = new Scanner(System.in);
         String title, author;
@@ -208,7 +229,10 @@ public class CityLibrary<T> {
         }while (!(isNumber));
     }
 
-    //ADD BOOK PART 2
+    /**
+     * This function is created to call registerAdmin function
+     * only Admin can add books, not other users
+     */
     public void addBook(){
         System.out.println("ADD BOOK TO LIBRARY" +
                          "\n===================");
@@ -222,7 +246,9 @@ public class CityLibrary<T> {
         }
     }
 
-    //SHOW BOOKS
+    /**
+     * To Show all the books
+     */
     public void showBooks(){
         System.out.println("AVAILABLE BOOKS" +
                 "\n===============");
@@ -241,7 +267,11 @@ public class CityLibrary<T> {
         //List<Book> students = (List<Book>)FileUtility.loadObject("books.ser");
     }
 
-    //SORT BOOKS PART 3
+    /**
+     * To sort all books in the array
+     * It can sort books by "title" or "author"
+     */
+
     public void sortBooks(){
         System.out.println("SORT BOOKS" +
                 "\n==========");
@@ -274,7 +304,10 @@ public class CityLibrary<T> {
         }
     }
 
-    //ADD SUBSCRIBERS
+    /**
+     * Boolean function existUsername  has been called here to avoid same username
+     * It will also chek tf the pin is 4 digit
+     */
     public void addSubscriber(){
         System.out.println("BECOME A SUBSCRIBER" +
                          "\n===================");
