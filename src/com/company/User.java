@@ -1,6 +1,8 @@
 package com.company;
 
-public abstract class User {
+import java.io.Serializable;
+
+public abstract class User implements Serializable {
     private String name;
     private int id;
 
@@ -17,6 +19,6 @@ public abstract class User {
         return id;
     }
 
-    public abstract void welcomeMessage();
+    public abstract String welcomeMessage();
 
 }

@@ -6,8 +6,8 @@ public class Subscriber extends User {
         super(name, id);
     }
 
-    public void welcomeMessage(){
-        System.out.println("Welcome " + getName().toUpperCase() + "!");
+    public String welcomeMessage(){
+        return "Welcome " + getName().toUpperCase() + " !";
     }
 
 }

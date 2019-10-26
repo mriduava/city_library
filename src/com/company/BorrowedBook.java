@@ -1,6 +1,8 @@
 package com.company;
 
-public class BorrowedBook extends Book {
+import java.io.Serializable;
+
+public class BorrowedBook extends Book implements Serializable {
 
     private String name;
     public BorrowedBook(String name, String title, String author, int quantity, float rating){
@@ -10,6 +12,13 @@ public class BorrowedBook extends Book {
 
     public String getName() {
         return name;
+    }
+
+    public String toString(){
+        return "\nBorrower: " + name.toUpperCase() +
+                "\nTitle   : " + getTitle().toUpperCase() +
+                "\nAuthor  : " + getAuthor().toUpperCase() +
+                "\n-----------------------";
     }
 
 }
