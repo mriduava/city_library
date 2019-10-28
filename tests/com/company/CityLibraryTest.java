@@ -11,9 +11,8 @@ class CityLibraryTest {
     //To test average rating
     @Test
     void avgRating() {
-        float num1 = cityLibrary.avgRating(2.9f);
-        float num2 = cityLibrary.avgRating(4.5f);
-        String result = String.format("%.1f", num2);
-        assertEquals(String.format("%.1f",3.7), result, "Output was long decimal,\n Converted to String format");
+        float num = cityLibrary.avgRating(2.9f, 3.3f);
+        String result = String.format("%.1f", num);
+        assertEquals(String.format("%.1f",3.1), result, "Output was long decimal,\n Converted to String format");
     }
 }

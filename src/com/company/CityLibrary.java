@@ -5,23 +5,29 @@ import java.util.*;
 
 /**
  * <h1>Library Program</h1>
- * <p>Admin and Subscribers as User
- * where Admin can add Books and Subscriber
- * can Borrow or Return Books from Library</p>
+ * <p>Admin and Subscribers as Users, where only Admin can add Books
+ * and Subscriber can Borrow or Return Books.</p>
+ * Users can show all available books and sort books by 'title' or 'author'.
+ * If a subscriber borrow a book, the book's quantity will be subtracted,
+ * and by returning back, the quantity will be added again.
+ * While returning back the book, subscribes can also add rating which is a float
+ * number (0.1 to 5.0)  Rating book is optional, that means the user cna skip
+ * that option just by pressing enter.
  * @author Maruf Ahmed
- * @version 1.0.0
+ * @version 1.0.1
  * @since 2019.10.16
  */
 
 public class CityLibrary{
 
+    //Defined fields and ArrayLists
+    private String libraryName = "";
     private static final int MAX_ADMINS = 2;
-    private ArrayList<Admin> admins = new ArrayList<>(MAX_ADMINS);
 
+    private ArrayList<Admin> admins = new ArrayList<>(MAX_ADMINS);
     private ArrayList<Subscriber> subscribers = new ArrayList<>();
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<BorrowedBook> borrowedBooks = new ArrayList<>();
-    private ArrayList<Float> rate = new ArrayList<>();
 
     //Just to color the console texts
     public static final String RED_BOLD = "\033[1;31m";
@@ -33,19 +39,30 @@ public class CityLibrary{
 
     /**
      * CityLibrary constructor
+     * Takes the library name is parameter
      */
-    private String libraryName = "";
     public CityLibrary(String libraryName){
         this.libraryName = libraryName;
     }
-    
+
+    /**
+     * This function will display the Menu Items.
+     * Each menu-item will call its specific function to execute by "switch" method.
+     * Before displaying menu-items this function calls other functions, for example
+     * 'addBooksToArray' function will fill the 'books' array with pre-defined Book objects.
+     *
+     * To avoid "NoSuchFileException" there files are created before Menu-items' function.
+     * All files will be loaded at the beginning and will be saved before the Program shut down.
+     * So users can retrieve data after restart the program.
+     */
     public void promptMenu() {
         System.out.println("====================================\n" +
                 ANSI_BLUE+ "* WELCOME TO " + libraryName + "  *" + ANSI_RESET);
 
         //To add books in array & to display
-        displayBooks();
+        addBooksToArray();
 
+        //Create files if they are not exist
         Path path1 = Paths.get("books.ser");
         Path path2 = Paths.get("br_books.ser");
         Path path3 = Paths.get("subscribers.ser");
@@ -54,6 +71,8 @@ public class CityLibrary{
             FileUtility.saveObject("br_books.ser", borrowedBooks);
             FileUtility.saveObject("subscribers.ser", subscribers);
         }
+
+        //Load Files & fill the defined ArrayList with the data of Files.
         ArrayList<Book> booksFile = (ArrayList<Book>)FileUtility.loadObject("books.ser");
         ArrayList<BorrowedBook> brBooksFile = (ArrayList<BorrowedBook>)FileUtility.loadObject("br_books.ser");
         ArrayList<Subscriber> subscribersFile = (ArrayList<Subscriber>)FileUtility.loadObject("subscribers.ser");
@@ -61,7 +80,7 @@ public class CityLibrary{
         borrowedBooks = brBooksFile;
         subscribers = subscribersFile;
 
-
+        //To display menu items
         MainMenu.MenuItems menuItems;
         do {
             menuItems = MainMenu.showMenuAndGetChoice();
@@ -94,6 +113,7 @@ public class CityLibrary{
                     showAllBorrowedBooks();
                     break;
                 case EXIT:
+                    //All data will be saved before the program shut down
                     FileUtility.saveObject("books.ser", books);
                     FileUtility.saveObject("subscribers.ser", subscribers);
                     FileUtility.saveObject("br_books.ser", borrowedBooks);
@@ -103,14 +123,31 @@ public class CityLibrary{
         } while (menuItems != menuItems.EXIT);
     }
 
+    /**
+     * Function to add Books in the books array
+     * This function will execute before displaying of menu-items
+     */
+    public void addBooksToArray(){
+        Book emil = new Book("Emil", "Astrid Lindgren", 2, 0.0f);
+        Book matilda = new Book("Matilda", "Roald Dahl", 0, 0.0f);
+        Book hunden = new Book("Hunden", "Kerstin Ekman", 3, 0.0f);
+        Book saknaden = new Book("Saknaden", "Ulf Lundell", 1, 0.0f);
+
+        books.add(emil);
+        books.add(matilda);
+        books.add(hunden);
+        books.add(saknaden);
+    }
 
     /**
      * Function to register Admin
-     * Max 2 Admin can be added as MAX_ADMINS=2
+     * Maximum 2 Admins can be added, as variable MAX_ADMINS=2
+     * "Do-while" loop is used to force the user to enter a 4 digit number.
+     * If admin registration is successful, it will print a welcome message.
      */
     public void registerAdmin(){
-        System.out.println("ADMIN LOGIN/REGISTRATION" +
-                         "\n========================");
+        System.out.println("ADMIN REGISTRATION" +
+                         "\n==================");
         Scanner scan = new Scanner(System.in);
         String name, id;
         System.out.println("ADMIN USERNAME: ");
@@ -138,8 +175,9 @@ public class CityLibrary{
     }
 
     /**
-     * Not using this function
-     * Just to check if "registerAdmin works or not
+     * NOT USED
+     * Just to check if "registerAdmin" works
+     * Function will print all registered Admins
      */
     public void showAdmins(){
         for (int i = 0; i< admins.size(); i++){
@@ -150,21 +188,7 @@ public class CityLibrary{
     }
 
     /**
-     * It will add Books to the books array
-     * This function will run before the display of Menuitems
-     */
-    public void displayBooks(){
-        Book emil = new Book("Emil", "Astrid Lindgren", 2, 0.0f);
-        Book matilda = new Book("Matilda", "Roald Dahl", 0, 0.0f);
-        Book hunden = new Book("Hunden", "Kerstin Ekman", 3, 0.0f);
-
-        books.add(emil);
-        books.add(matilda);
-        books.add(hunden);
-    }
-
-    /**
-     * To create book object and to add in the book's array
+     * Function to create book object and to add in the "books" array
      */
     private void generateBookInfo(){
         Scanner input = new Scanner(System.in);
@@ -187,7 +211,7 @@ public class CityLibrary{
                 Book bookInfo = new Book(title, author, quantity, rating);
                 books.add(bookInfo);
                 FileUtility.saveObject("books.ser", books);
-                System.out.println(title.toUpperCase() + ANSI_GREEN + " has been successfully added." + ANSI_RESET);
+                System.out.println(ANSI_GREEN +title.toUpperCase() + " has been successfully added." + ANSI_RESET);
             }else {
                 System.out.println(ANSI_RED + "Please write a number..." + ANSI_RESET);
                 isNumber = false;
@@ -229,10 +253,6 @@ public class CityLibrary{
                     book.getQuantity(),
                     ANSI_RESET);
         }
-
-        //SHOW BOOKS FROM FILE
-        /*ArrayList<Book> booksFile = (ArrayList<Book>)FileUtility.loadObject("books.ser");
-        System.out.println(ANSI_BLUE + booksFile.toString().replace("[", "").replace("]", "") + ANSI_RESET);*/
     }
 
     /**
@@ -256,7 +276,7 @@ public class CityLibrary{
                 System.out.println(ANSI_GREEN + "BOOKS SORTED BY TITLE\n" + ANSI_RESET +
                         "---------------------");
                 for(Book books: books){
-                    System.out.println(books);
+                    System.out.println(ANSI_BLUE + books + ANSI_RESET);
                 }
                 return;
             case "author":
@@ -266,7 +286,7 @@ public class CityLibrary{
                 System.out.println(ANSI_GREEN + "BOOKS SORTED BY AUTHOR\n" + ANSI_RESET +
                         "----------------------");
                 for(Book books: books){
-                    System.out.println(books);
+                    System.out.println(ANSI_BLUE + books + ANSI_RESET);
                 }
                 return;
         }
@@ -274,7 +294,7 @@ public class CityLibrary{
 
     /**
      * Boolean function existUsername  has been called here to avoid same username
-     * It will also check tf the pin is 4 digit
+     * It will also check tf the pincode is a 4 digit number
      */
     public void addSubscriber(){
         System.out.println("BECOME A SUBSCRIBER" +
@@ -296,7 +316,6 @@ public class CityLibrary{
                         int id2 = Integer.valueOf(id);
                         Subscriber subscriberInfo = new Subscriber(name, id2);
                         subscribers.add(subscriberInfo);
-                        //FileUtility.saveObject("subscribers.ser", subscribers);
                         System.out.println(ANSI_GREEN + subscriberInfo.welcomeMessage() + ANSI_RESET);
                         break;
                     } else {
@@ -326,7 +345,10 @@ public class CityLibrary{
         }
     }
 
-    //BORROW BOOK
+    /**
+     * Function to borrow books
+     * First the
+     */
     public void borrowBook(){
         System.out.println("BORROW BOOK" +
                          "\n===========");
@@ -350,8 +372,6 @@ public class CityLibrary{
                             borrowedBooks.add(borrowedBook);
                             System.out.println(bookTitle.toUpperCase() + ANSI_GREEN + " is now borrowed!\n" + ANSI_RESET);
                             book.setQuantity(book.getQuantity()-1);
-                            //FileUtility.saveObject("books.ser", books);
-                            //FileUtility.saveObject("br_books.ser", borrowedBooks);
                             break;
                         }else{
                             System.out.println(ANSI_PURPLE + "You have already borrowed this book." + ANSI_RESET);
@@ -423,8 +443,6 @@ public class CityLibrary{
                             for (Book book : books) {
                                 if (book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())) {
                                     book.setQuantity(book.getQuantity() + 1);
-                                    //FileUtility.saveObject("books.ser", books);
-                                    //FileUtility.saveObject("br_books.ser", borrowedBooks);
                                     Scanner input2 = new Scanner(System.in).useLocale(Locale.US);
                                     System.out.println(ANSI_BLUE + "Rate the book (Optional)" +
                                             "\nEnter a number 0.1 - 5.0" + ANSI_RESET);
@@ -432,11 +450,14 @@ public class CityLibrary{
                                     if (str.isEmpty()) {
                                         System.out.println(ANSI_PURPLE + "You've skipped rating." + ANSI_RESET);
                                         break;
+                                    }else if (str.contains(",")){
+                                        System.out.println(ANSI_RED + "No ratings added...\nYou used 'comma' instead of 'dot'!" + ANSI_RESET);
                                     } else {
-                                        rate.add(book.getRating());
                                         float rate = Float.parseFloat(str);
-                                        if (rate > 0 && rate <= 5) {
-                                            book.setRating(avgRating(rate));
+                                        if (book.getRating() == 0){
+                                            book.setRating(rate);
+                                        }else if (rate > 0 && rate <= 5) {
+                                            book.setRating(avgRating(book.getRating(), rate));
                                             System.out.println(ANSI_GREEN + "Thanks for rating." + ANSI_RESET);
                                             break;
                                         } else {
@@ -481,14 +502,6 @@ public class CityLibrary{
                         ANSI_RESET);
             }
         }
-
-        /*ArrayList<BorrowedBook> brBooksFile = (ArrayList<BorrowedBook>)FileUtility.loadObject("br_books.ser");
-        if (brBooksFile.size() == 0){
-            System.out.println(ANSI_PURPLE + "This file is Empty" + ANSI_RESET);
-        }else{
-            System.out.println(ANSI_BLUE + brBooksFile.toString().replace("[", "").replace("]", "") + ANSI_RESET);
-        }*/
-
     }
 
     //CHECK IF THE USERNAME EXIST IN THE ARRAY LIST
@@ -516,18 +529,10 @@ public class CityLibrary{
         return false;
     }
 
-    /**
-     * Function to take input as float number
-     * @param num float number
-     * @return Calculated average rating
-     */
-    public float avgRating(float num){
-        rate.add(num);
-        float total = 0.0f;
-        for (float r: rate){
-            total += r;
-        }
-        float avgRate = total/(float) rate.size();
+
+    public float avgRating(float num1, float num2){
+        float total = num1 + num2;
+        float avgRate = total/(float) 2;
         return avgRate;
     }
 
