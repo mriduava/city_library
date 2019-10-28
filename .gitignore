@@ -1,5 +1,5 @@
 out
 .idea
-.ser
+*.ser
 CityLibrary.iml
 doc
