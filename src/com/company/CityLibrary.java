@@ -7,11 +7,11 @@ import java.util.*;
  * <h1>Library Program</h1>
  * <p>Admin and Subscribers as Users, where only Admin can add Books
  * and Subscriber can Borrow or Return Books.</p>
- * Users can show all available books and sort books by 'title' or 'author'.
+ * Users can see all available books and sort books by 'title' or 'author'.
  * If a subscriber borrow a book, the book's quantity will be subtracted,
- * and by returning back, the quantity will be added again.
- * While returning back the book, subscribes can also add rating which is a float
- * number (0.1 to 5.0)  Rating book is optional, that means the user cna skip
+ * and by returning back the quantity will be added again.
+ * While returning back the book, subscribes can also add 'rating' which is a float
+ * number (0.1 to 5.0).  Rating book is optional, that means the user cna skip
  * that option just by pressing enter.
  * @author Maruf Ahmed
  * @version 1.0.1
@@ -51,7 +51,7 @@ public class CityLibrary{
      * Before displaying menu-items this function calls other functions, for example
      * 'addBooksToArray' function will fill the 'books' array with pre-defined Book objects.
      *
-     * To avoid "NoSuchFileException" there files are created before Menu-items' function.
+     * To avoid "NoSuchFileException", files are created before Menu-items' function executes.
      * All files will be loaded at the beginning and will be saved before the Program shut down.
      * So users can retrieve data after restart the program.
      */
@@ -125,7 +125,7 @@ public class CityLibrary{
 
     /**
      * Function to add Books in the books array
-     * This function will execute before displaying of menu-items
+     * This function will execute before displaying the menu-items
      */
     public void addBooksToArray(){
         Book emil = new Book("Emil", "Astrid Lindgren", 2, 0.0f);
@@ -141,7 +141,7 @@ public class CityLibrary{
 
     /**
      * Function to register Admin
-     * Maximum 2 Admins can be added, as variable MAX_ADMINS=2
+     * Maximum 2 Admins can be added, as it is predeclared as MAX_ADMINS=2
      * "Do-while" loop is used to force the user to enter a 4 digit number.
      * If admin registration is successful, it will print a welcome message.
      */
@@ -176,7 +176,7 @@ public class CityLibrary{
 
     /**
      * NOT USED
-     * Just to check if "registerAdmin" works
+     * Just to check if "registerAdmin" function works
      * Function will print all registered Admins
      */
     public void showAdmins(){
@@ -189,6 +189,7 @@ public class CityLibrary{
 
     /**
      * Function to create book object and to add in the "books" array
+     * This function is called from the "addBook" function.
      */
     private void generateBookInfo(){
         Scanner input = new Scanner(System.in);
@@ -221,8 +222,8 @@ public class CityLibrary{
     }
 
     /**
-     * Only Admin can add books, not other users
-     * To force the user to register "registerAdmin" function has been called
+     * This function will assure that only Admin can add books, not other users.
+     * To force the user to register "registerAdmin" function has been called.
      */
     public void addBook(){
         System.out.println("ADD BOOK TO LIBRARY" +
@@ -238,20 +239,14 @@ public class CityLibrary{
     }
 
     /**
-     * To Show all the books
+     * To Print all the books from Array.
+     * "toString" method is used to print all the books
      */
     public void showBooks(){
         System.out.println("AVAILABLE BOOKS" +
                 "\n===============");
-        //SHOW BOOKS FROM ARRAY LIST
         for (Book book: books){
-            System.out.printf("%sTitle   : %s \nAuthor  : %s\nAvg Rate: %.1f\nQuantity: %s %s\n------------------\n",
-                    ANSI_BLUE,
-                    book.getTitle().toUpperCase(),
-                    book.getAuthor().toUpperCase(),
-                    book.getRating(),
-                    book.getQuantity(),
-                    ANSI_RESET);
+            System.out.println(ANSI_BLUE + book + ANSI_RESET);
         }
     }
 
@@ -293,8 +288,9 @@ public class CityLibrary{
     }
 
     /**
-     * Boolean function existUsername  has been called here to avoid same username
-     * It will also check tf the pincode is a 4 digit number
+     * Boolean function 'existUsername'  has been called here to avoid the
+     * creation of the same username.
+     * It will also check tf the pincode is a 4 digit number.
      */
     public void addSubscriber(){
         System.out.println("BECOME A SUBSCRIBER" +
@@ -333,7 +329,7 @@ public class CityLibrary{
     }
 
     /**
-     * NOT USED (Just to check "addSubscriber" functions)
+     * NOT USED (Just to check "addSubscriber" function works)
      * This function will loop subscribers array
      * and print oll the subscribers info to the console.
      */
@@ -347,7 +343,12 @@ public class CityLibrary{
 
     /**
      * Function to borrow books
-     * First the
+     * First the function takes the username as input
+     * If the username exist in the array, it will ask the user to enter
+     * a book title. If the book exist in the array, then the 'username' and
+     * 'book info' will create a new object and will add to the "borrowedBooks" array.
+     * Two nested 'for-loops' is used to search the subscriber in 'subscriber' array &
+     * to search the 'book' in 'books' array.
      */
     public void borrowBook(){
         System.out.println("BORROW BOOK" +
@@ -392,7 +393,9 @@ public class CityLibrary{
         }
     }
 
-    //MY BORROWED BOOKS
+    /**
+     *
+     */
     public void showMyBorrowedBooks(){
         System.out.println("MY BORROWED BOOKS" +
                          "\n=================");

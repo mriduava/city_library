@@ -45,12 +45,12 @@ public class Book implements Comparable<Book>, Serializable {
         this.rating = rating;
     }
 
-    //SORT BOOKS PART 1
+    //Setter of SortBy field
     public static void setSortBy(Book.SortBy sortBy){
         Book.SortBy = sortBy;
     }
 
-    //SORT BOOKS PART 2
+    //Sort Books
     public int compareTo(Book books){
         switch (SortBy){
             case AUTHOR:
@@ -61,10 +61,10 @@ public class Book implements Comparable<Book>, Serializable {
     }
 
     public String toString(){
-        return "Title   : " + title.toUpperCase() +
-                "\nAuthor  : " + author.toUpperCase() +
-                "\nAvg Rate: " + rating +
-                "\nQuantity: " + quantity +
-                "\n-----------------------";
+        return String.format("Title   : %s \nAuthor  : %s\nAvg Rate: %.1f\nQuantity: %s\n------------------",
+                title.toUpperCase(),
+                author.toUpperCase(),
+                rating,
+                quantity);
     }
 }
