@@ -11,8 +11,8 @@ class CityLibraryTest {
     //To test average rating
     @Test
     void avgRating() {
-        String num = cityLibrary.avgRating(3.1f, 4.9f);
+        float num = cityLibrary.avgRating(3.1f, 4.9f);
         String result = String.format("%.1f", num);
-        assertEquals(String.format("%.1f", 4.0), result, "Converted to String format");
+        assertEquals(String.format("%.1f", 4.0f), result, "Converted to String format");
     }
 }
