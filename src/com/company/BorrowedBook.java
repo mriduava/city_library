@@ -15,7 +15,7 @@ public class BorrowedBook extends Book implements Serializable {
     }
 
     public String toString(){
-        return "\nBorrower: " + name.toUpperCase() +
+        return "Borrower: " + name.toUpperCase() +
                 "\nTitle   : " + getTitle().toUpperCase() +
                 "\nAuthor  : " + getAuthor().toUpperCase() +
                 "\n-----------------------";

@@ -45,12 +45,12 @@ public class Book implements Comparable<Book>, Serializable {
         this.rating = rating;
     }
 
-    //SORT BOOKS PART 1
+    //Setter of SortBy field
     public static void setSortBy(Book.SortBy sortBy){
         Book.SortBy = sortBy;
     }
 
-    //SORT BOOKS PART 2
+    //Compare book to sort
     public int compareTo(Book books){
         switch (SortBy){
             case AUTHOR:
