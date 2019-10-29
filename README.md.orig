@@ -1,6 +1,7 @@
-# STADS BIBLIOTEK
-Library Program, where the Admin can Register and add Books
-Subsciber can Register and Borrow/Retrun Books
+# CITY LIBRARY
+Library Program, where the Admin can Register and add Books.
+Subscribers can Register and Borrow/Return Books.
+<<<<<<< HEAD
 
 #### UML DIAGRAM
 ![](uml/CityLibrary.jpg)

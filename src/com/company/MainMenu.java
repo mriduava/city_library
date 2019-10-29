@@ -5,10 +5,11 @@ import java.util.Scanner;
 public class MainMenu {
 
     public enum MenuItems{
-        ADMIN_LOGIN_REG("ADMIN REGISTRATION"),
+        ADMIN_REGISTRATION("ADMIN REGISTRATION"),
         ADD_BOOKS("ADD BOOKS"),
         SHOW_BOOKS("SHOW BOOKS"),
         SORT_BOOKS("SORT BOOKS"),
+        SUBSCRIBER_LOGIN("SUBSCRIBER LOGIN"),
         SUBSCRIBER_REGISTRATION("SUBSCRIBER'S REGISTRATION"),
         BORROW_BOOK("BORROW BOOK"),
         MY_BORROWED_BOOKS("MY BORROWED BOOKS"),
@@ -21,6 +22,9 @@ public class MainMenu {
             this.description = description;
         }
 
+        public String getDescription() {
+            return description;
+        }
     }
 
 
@@ -45,11 +49,11 @@ public class MainMenu {
                     break;
                 }else {
                     menuNum = false;
-                    System.out.println("ENTER A MENU ITEM NUMBER: 1 - 10");
+                    System.out.println("ENTER A MENU ITEM NUMBER: 1 - 11");
                 }
             } else {
                 menuNum = false;
-                System.out.println("ENTER A MENU ITEM NUMBER: 1 - 10");
+                System.out.println("ENTER A MENU ITEM NUMBER: 1 - 11");
             }
         }while (!menuNum);
 

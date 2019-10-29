@@ -14,21 +14,33 @@ import java.util.*;
  * number (0.1 to 5.0).  Rating book is optional, that means the user cna skip
  * that option just by pressing enter.
  * @author Maruf Ahmed
+<<<<<<< HEAD
+ * @version 1.0.1
+ * @since 2019.10.16
+=======
  * @version 1.2.0
  * @since 2019.10.29
+>>>>>>> develop
  */
 
 public class CityLibrary{
 
     //Defined fields and ArrayLists
+<<<<<<< HEAD
+    private String libraryName = "";
+=======
+>>>>>>> develop
     private static final int MAX_ADMINS = 2;
-    private ArrayList<Admin> admins = new ArrayList<>(MAX_ADMINS);
 
+    private ArrayList<Admin> admins = new ArrayList<>(MAX_ADMINS);
     private ArrayList<Subscriber> subscribers = new ArrayList<>();
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<BorrowedBook> borrowedBooks = new ArrayList<>();
+<<<<<<< HEAD
+=======
     private ArrayList<Float> rate = new ArrayList<>();
     private ArrayList<String> loginData = new ArrayList<>();
+>>>>>>> develop
 
     //Just to color the console texts
     public static final String RED_BOLD = "\033[1;31m";
@@ -44,7 +56,6 @@ public class CityLibrary{
      * CityLibrary constructor
      * Takes the library name is parameter
      */
-    private String libraryName = "";
     public CityLibrary(String libraryName){
         this.libraryName = libraryName;
     }
@@ -63,9 +74,14 @@ public class CityLibrary{
         System.out.println("====================================\n" +
                 ANSI_BLUE+ "* WELCOME TO " + libraryName + "  *" + ANSI_RESET);
 
+<<<<<<< HEAD
+        //To add books in array & to display
+        addBooksToArray();
+=======
 
         //To add books in the array
         displayBooks();
+>>>>>>> develop
 
         //Create files if they are not exist
         Path path1 = Paths.get("books.ser");
@@ -85,9 +101,12 @@ public class CityLibrary{
         borrowedBooks = brBooksFile;
         subscribers = subscribersFile;
 
+<<<<<<< HEAD
+=======
         //To display the user name who is recently logged in or has registered
         isLoggedIn();
 
+>>>>>>> develop
         //To display menu items
         MainMenu.MenuItems menuItems;
         do {
@@ -139,6 +158,18 @@ public class CityLibrary{
      * Function to add Books in the books array
      * This function will execute before displaying the menu-items
      */
+<<<<<<< HEAD
+    public void addBooksToArray(){
+        Book emil = new Book("Emil", "Astrid Lindgren", 2, 0.0f);
+        Book matilda = new Book("Matilda", "Roald Dahl", 0, 0.0f);
+        Book hunden = new Book("Hunden", "Kerstin Ekman", 3, 0.0f);
+        Book saknaden = new Book("Saknaden", "Ulf Lundell", 1, 0.0f);
+
+        books.add(emil);
+        books.add(matilda);
+        books.add(hunden);
+        books.add(saknaden);
+=======
     public void displayBooks(){
         Book emil = new Book("Emil", "Astrid Lindgren", 2, 0.0f);
         Book matilda = new Book("Matilda", "Roald Dahl", 0, 0.0f);
@@ -149,6 +180,7 @@ public class CityLibrary{
         books.add(emil);
         books.add(ladiesCope);
         books.add(hunden);
+>>>>>>> develop
     }
 
     /**
@@ -159,7 +191,7 @@ public class CityLibrary{
      */
     public void registerAdmin(){
         System.out.println("ADMIN REGISTRATION" +
-                "\n==================");
+                         "\n==================");
         Scanner scan = new Scanner(System.in);
         String name, id;
         System.out.println("ADMIN USERNAME: ");
@@ -223,7 +255,12 @@ public class CityLibrary{
                 quantity = input2.nextInt();
                 Book bookInfo = new Book(title, author, quantity, rating);
                 books.add(bookInfo);
+<<<<<<< HEAD
+                FileUtility.saveObject("books.ser", books);
+                System.out.println(ANSI_GREEN +title.toUpperCase() + " has been successfully added." + ANSI_RESET);
+=======
                 System.out.println(ANSI_GREEN + title.toUpperCase() +  " has been successfully added." + ANSI_RESET);
+>>>>>>> develop
             }else {
                 System.out.println(ANSI_RED + "Please write a number..." + ANSI_RESET);
                 isNumber = false;
@@ -238,7 +275,7 @@ public class CityLibrary{
      */
     public void addBook(){
         System.out.println("ADD BOOK TO LIBRARY" +
-                "\n===================");
+                         "\n===================");
         if (admins.size() != 0){
             generateBookInfo();
         }else {
@@ -298,6 +335,11 @@ public class CityLibrary{
     }
 
     /**
+<<<<<<< HEAD
+     * Boolean function 'existUsername'  has been called here to avoid the
+     * creation of the same username.
+     * It will also check tf the pincode is a 4 digit number.
+=======
      * Function to register subscribers
      * Boolean function 'existUsername'  has been called here to avoid the
      * creation of multiple users with the same username.
@@ -306,10 +348,11 @@ public class CityLibrary{
      * create a Subscriber object, will add to 'subscribers' ArrayList.
      * Besides the registration, this function also works as 'login' by
      * sending data to 'loginData' array.
+>>>>>>> develop
      */
     public void registerSubscriber(){
         System.out.println("SUBSCRIBER REGISTRATION" +
-                "\n=======================");
+                         "\n=======================");
         Scanner scan = new Scanner(System.in);
         String name, id;
         boolean userName;
@@ -326,7 +369,10 @@ public class CityLibrary{
                         int id2 = Integer.valueOf(id);
                         Subscriber subscriberInfo = new Subscriber(name, id2);
                         subscribers.add(subscriberInfo);
+<<<<<<< HEAD
+=======
                         loginData.add(name);
+>>>>>>> develop
                         System.out.println(ANSI_GREEN + subscriberInfo.welcomeMessage() + ANSI_RESET);
                         break;
                     } else {
@@ -334,7 +380,7 @@ public class CityLibrary{
                         System.out.println(ANSI_RED + "Please enter a 4 digit number..." + ANSI_RESET);
                     }
                 } while (!(isNumber));
-                break;
+               break;
             }else {
                 userName = false;
                 System.out.println(ANSI_RED + "This username is used." + ANSI_RESET);
@@ -353,53 +399,57 @@ public class CityLibrary{
      */
     public void loginSubscriber(){
         System.out.println("SUBSCRIBER LOGIN" +
-                "\n================");
+                         "\n================");
         Scanner scan = new Scanner(System.in);
         String name, id;
-        System.out.println("ENTER THE USERNAME: ");
-        name = scan.nextLine();
-        if (existUsername(name)){
-            boolean isNumber;
-            int tryCount = 1;
-            do {
-                System.out.println("PIN CODE (4 digit): ");
-                String regex = "\\d+";
-                id = scan.nextLine();
-                if (id.length() == 4 && id.matches(regex)) {
-                    int id2 = Integer.parseInt(id);
-                    if (existUser(name, id2)){
-                        isNumber = true;
-                        loginData.add(name);
-                        System.out.println(ANSI_GREEN + "Hello " + name.toUpperCase() + " !" + ANSI_RESET);
-                    }else {
+            System.out.println("ENTER THE USERNAME: ");
+            name = scan.nextLine();
+            if (existUsername(name)){
+                boolean isNumber;
+                int tryCount = 1;
+                do {
+                    System.out.println("PIN CODE (4 digit): ");
+                    String regex = "\\d+";
+                    id = scan.nextLine();
+                    if (id.length() == 4 && id.matches(regex)) {
+                        int id2 = Integer.parseInt(id);
+                        if (existUser(name, id2)){
+                            isNumber = true;
+                            loginData.add(name);
+                            System.out.println(ANSI_GREEN + "Hello " + name.toUpperCase() + " !" + ANSI_RESET);
+                        }else {
+                            isNumber = false;
+                            if (tryCount < 2){
+                                System.out.println(ANSI_PURPLE + "Pincode is wrong\nTry again..." + ANSI_RESET);
+                                tryCount++;
+                            }else {
+                                System.out.println(ANSI_PURPLE + "Sorry! Try later..." + ANSI_RESET);
+                                tryCount++;
+                            }
+                        }
+                    } else {
                         isNumber = false;
                         if (tryCount < 2){
-                            System.out.println(ANSI_PURPLE + "Pincode is wrong\nTry again..." + ANSI_RESET);
+                            System.out.println(ANSI_RED + "Not a 4 digit number" + ANSI_RESET);
                             tryCount++;
                         }else {
-                            System.out.println(ANSI_PURPLE + "Sorry! Try later..." + ANSI_RESET);
+                            System.out.println(ANSI_RED + "Sorry! Try later..." + ANSI_RESET);
                             tryCount++;
                         }
                     }
-                } else {
-                    isNumber = false;
-                    if (tryCount < 2){
-                        System.out.println(ANSI_RED + "Not a 4 digit number" + ANSI_RESET);
-                        tryCount++;
-                    }else {
-                        System.out.println(ANSI_RED + "Sorry! Try later..." + ANSI_RESET);
-                        tryCount++;
-                    }
-                }
-            } while (!(isNumber) && tryCount<=2);
-        }else {
-            System.out.println(ANSI_RED + "You're not a Subscriber\nPlease register" + ANSI_RESET);
-        }
+                } while (!(isNumber) && tryCount<=2);
+            }else {
+                System.out.println(ANSI_RED + "You're not a Subscriber\nPlease register" + ANSI_RESET);
+            }
     }
 
     /**
+<<<<<<< HEAD
+     * NOT USED (Just to check "addSubscriber" function works)
+=======
      * NOT USED
      * (Just to check "addSubscriber" functions)
+>>>>>>> develop
      * This function will loop subscribers array
      * and print oll the subscribers info to the console.
      */
@@ -413,6 +463,41 @@ public class CityLibrary{
 
     /**
      * Function to borrow books
+<<<<<<< HEAD
+     * First the function takes the username as input
+     * If the username exist in the array, it will ask the user to enter
+     * a book title. If the book exist in the array, then the 'username' and
+     * 'book info' will create a new object and will add to the "borrowedBooks" array.
+     * Two nested 'for-loops' is used to search the subscriber in 'subscriber' array &
+     * to search the 'book' in 'books' array.
+     */
+    public void borrowBook(){
+        System.out.println("BORROW BOOK" +
+                         "\n===========");
+        Scanner input = new Scanner(System.in);
+        System.out.println("SUBSCRIBER NAME: ");
+        String subscriberName = input.nextLine();
+
+        boolean foundSubscriber = false;
+        for (Subscriber subscriber: subscribers){
+            if ((subscriber.getName().toLowerCase()).equals(subscriberName.toLowerCase())){
+                foundSubscriber = true;
+                String name = subscriber.getName();
+                System.out.println("BOOK TITLE TO BORROW: ");
+                String bookTitle = input.nextLine();
+                boolean foundBook = false;
+                for (Book book: books){
+                    if ((book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())) && (book.getQuantity() > 0)){
+                        foundBook = true;
+                        BorrowedBook borrowedBook = new BorrowedBook(name, book.getTitle(), book.getAuthor(), book.getQuantity(), book.getRating());
+                        if (!existBook(borrowedBook)){
+                            borrowedBooks.add(borrowedBook);
+                            System.out.println(bookTitle.toUpperCase() + ANSI_GREEN + " is now borrowed!\n" + ANSI_RESET);
+                            book.setQuantity(book.getQuantity()-1);
+                            break;
+                        }else{
+                            System.out.println(ANSI_PURPLE + "You have already borrowed this book." + ANSI_RESET);
+=======
      * First the function will check the 'loginData' array where user's loggedin data
      * are stored. If the username exist in that array, it will ask the user to enter
      * a book title. If the book exist in the array, then the 'username' and
@@ -448,6 +533,7 @@ public class CityLibrary{
                         } else if ((book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())) && (book.getQuantity() == 0)) {
                             foundBook = true;
                             System.out.println(ANSI_PURPLE + "Sorry, this book is not available to borrow." + ANSI_RESET);
+>>>>>>> develop
                         }
                     }
                     if (!foundBook) {
@@ -462,12 +548,16 @@ public class CityLibrary{
     }
 
     /**
+<<<<<<< HEAD
+     *
+=======
      * Function to show the LoggedIn subscriber's borrowed books.
      * The function will check the 'loginData' array. If it is not empty, it
      * will take tale the value of the last index of the 'loginData' array, which
      * is equal to 'subscriberName'. Finally the 'for-loop' function will search
      * in the 'borrowedBooks' array by this 'subscriber' name, and will print all
      * the values.
+>>>>>>> develop
      */
     public void showMyBorrowedBooks(){
         if (!loginData.isEmpty()) {
@@ -492,6 +582,47 @@ public class CityLibrary{
 
     //RETURN BOOK
     public void returnBook(){
+<<<<<<< HEAD
+        System.out.println("RETURN BOOK" +
+                         "\n===========");
+        Scanner input = new Scanner(System.in);
+        System.out.println("YOUR NAME: ");
+        String subscriberName = input.nextLine();
+
+        boolean foundSubscriber = false;
+        boolean foundBook = false;
+        try {
+            for (BorrowedBook borrowedBook : borrowedBooks){
+                if ((borrowedBook.getName().toLowerCase()).equals(subscriberName.toLowerCase())) {
+                    foundSubscriber = true;
+                    System.out.println("BOOK TITLE: ");
+                    String bookTitle = input.nextLine();
+
+                    for (BorrowedBook borrowedBook2 : borrowedBooks) {
+                        if ((borrowedBook2.getName().toLowerCase()).equals(subscriberName.toLowerCase()) && bookTitle.toLowerCase().equals(borrowedBook2.getTitle().toLowerCase())) {
+                            borrowedBooks.remove(borrowedBook2);
+                            System.out.println(bookTitle.toUpperCase() + ANSI_GREEN + " has been canceled." + ANSI_RESET);
+                            foundBook = true;
+                            for (Book book : books) {
+                                if (book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())) {
+                                    book.setQuantity(book.getQuantity() + 1);
+                                    Scanner input2 = new Scanner(System.in).useLocale(Locale.US);
+                                    System.out.println(ANSI_BLUE + "Rate the book (Optional)" +
+                                            "\nEnter a number 0.1 - 5.0" + ANSI_RESET);
+                                    String str = input2.nextLine();
+                                    if (str.isEmpty()) {
+                                        System.out.println(ANSI_PURPLE + "You've skipped rating." + ANSI_RESET);
+                                        break;
+                                    }else if (str.contains(",")){
+                                        System.out.println(ANSI_RED + "No ratings added...\nYou used 'comma' instead of 'dot'!" + ANSI_RESET);
+                                    } else {
+                                        float rate = Float.parseFloat(str);
+                                        if (book.getRating() == 0){
+                                            book.setRating(rate);
+                                        }else if (rate > 0 && rate <= 5) {
+                                            book.setRating(avgRating(book.getRating(), rate));
+                                            System.out.println(ANSI_GREEN + "Thanks for rating." + ANSI_RESET);
+=======
         if (!loginData.isEmpty()) {
             System.out.println("RETURN BOOK" +
                     "\n===========");
@@ -518,6 +649,7 @@ public class CityLibrary{
                                         String str = input2.nextLine();
                                         if (str.isEmpty()) {
                                             System.out.println(ANSI_PURPLE + "You've skipped rating." + ANSI_RESET);
+>>>>>>> develop
                                             break;
                                         } else if (str.contains(",")) {
                                             System.out.println(ANSI_RED + "Sorry! No rating added\nYou've used 'comma' instead of 'dot'!" + ANSI_RESET);
@@ -561,7 +693,7 @@ public class CityLibrary{
     //SHOW ALL BORROWED BOOKS
     public void showAllBorrowedBooks(){
         System.out.println("ALL BORROWED BOOKS" +
-                "\n==================");
+                         "\n==================");
         if (borrowedBooks.size() == 0){
             System.out.println(ANSI_PURPLE + "Nobody borrowed any books" + ANSI_RESET);
         }else {
@@ -620,6 +752,13 @@ public class CityLibrary{
         return false;
     }
 
+<<<<<<< HEAD
+
+    public float avgRating(float num1, float num2){
+        float total = num1 + num2;
+        float avgRate = total/(float) 2;
+        return avgRate;
+=======
     /**
      * To chek user login
      */
@@ -648,6 +787,7 @@ public class CityLibrary{
     public String avgRating(float num1, float num2){
         float avgRate = (num1 + num2)/(float) 2;
         return String.format("%.1f", avgRate);
+>>>>>>> develop
     }
 
 }
