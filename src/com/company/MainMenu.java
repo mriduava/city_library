@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MainMenu {
 
     public enum MenuItems{
-        ADMIN_LOGIN_REG("ADMIN REGISTRATION"),
+        ADMIN_REGISTRATION("ADMIN REGISTRATION"),
         ADD_BOOKS("ADD BOOKS"),
         SHOW_BOOKS("SHOW BOOKS"),
         SORT_BOOKS("SORT BOOKS"),
@@ -22,6 +22,9 @@ public class MainMenu {
             this.description = description;
         }
 
+        public String getDescription() {
+            return description;
+        }
     }
 
 
