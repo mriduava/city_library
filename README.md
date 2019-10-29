@@ -4,7 +4,7 @@ Subsciber can Register and Borrow/Retrun Books
  > @author Maruf Ahmed
  > <br> @version 1.2.0
  > <br>@since 2019.10.29
-## <p>Login function has been added in the new version 1.2.0</p>
+### <p>Login function has been added in the new version 1.2.0</p>
 
 #### UML DIAGRAM
 ![](uml/CityLibrary.jpg)
@@ -20,5 +20,5 @@ Subsciber can Register and Borrow/Retrun Books
  * All data will be saved in files. So those data can be retrieved after restart
  the program.
 
-## <p>Feel free to ask me if you have any questions at maruf.ahmed@live.se </p>
+> <p>Feel free to ask me if you have any questions at maruf.ahmed@live.se </p>
 
