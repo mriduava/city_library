@@ -14,7 +14,7 @@ import java.util.*;
  * number (0.1 to 5.0).  Rating book is optional, that means the user cna skip
  * that option just by pressing enter.
  * @author Maruf Ahmed
- * @version 1.0.1
+ * @version 1.1.0
  * @since 2019.10.16
  */
 
