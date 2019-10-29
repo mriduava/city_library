@@ -9,7 +9,6 @@ public class MainMenu {
         ADD_BOOKS("ADD BOOKS"),
         SHOW_BOOKS("SHOW BOOKS"),
         SORT_BOOKS("SORT BOOKS"),
-        SUBSCRIBER_LOGIN("SUBSCRIBER LOGIN"),
         SUBSCRIBER_REGISTRATION("SUBSCRIBER'S REGISTRATION"),
         BORROW_BOOK("BORROW BOOK"),
         MY_BORROWED_BOOKS("MY BORROWED BOOKS"),
@@ -49,11 +48,11 @@ public class MainMenu {
                     break;
                 }else {
                     menuNum = false;
-                    System.out.println("ENTER A MENU ITEM NUMBER: 1 - 11");
+                    System.out.println("ENTER A MENU ITEM NUMBER: 1 - 10");
                 }
             } else {
                 menuNum = false;
-                System.out.println("ENTER A MENU ITEM NUMBER: 1 - 11");
+                System.out.println("ENTER A MENU ITEM NUMBER: 1 - 10");
             }
         }while (!menuNum);
 
