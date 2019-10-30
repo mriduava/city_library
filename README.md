@@ -2,16 +2,17 @@
 ‘City Library’ is a simple library program, where users are admin, subscriber or any 
 person. In this program an admin can register and add book to the Library book’s list. 
 And subscriber can register or login by ‘username’ and ‘pin-code’. This program’s code 
-has been written by Java JDK 13.0.1. and by following MVC (Model View Controller) 
-design pattern. 
+has been written by Java JDK 13.0.1
+
  > @author Maruf Ahmed
  > <br> @version 1.2.0
  > <br>@since 2019.10.29
 ><br>
-><br><b>Login function has been added in the new version 1.2.0</b>
+><br><b>Login function has been added in this version 1.2.0</b>
 ><br>To get the older version 1.1.0, clone from branch vs110
 #### UML DIAGRAM
-![](uml/CityLibrary.png)
+
+![](uml/citylibrary_maruf.jpg)
 
 #### FUNCTIONALITIES
  * Users can see all available books and sort books by 'title' or 'author'.
@@ -24,5 +25,5 @@ design pattern.
  * All data will be saved in files. So those data can be retrieved after restart
  the program.
 
-> Feel free to ask me if you have any questions at <em>maruf.ahmed@live.se</em>
+> Feel free to ask me if you have any questions at maruf.ahmed@live.se
 
