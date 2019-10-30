@@ -528,7 +528,7 @@ public class CityLibrary{
                                                     book.setRating(rate);
                                                     System.out.println(ANSI_GREEN + "Thanks for rating." + ANSI_RESET);
                                                 } else {
-                                                    float calRate = Float.parseFloat(avgRating(book.getRating(), rate));
+                                                    float calRate = avgRating(book.getRating(), rate);
                                                     book.setRating(calRate);
                                                     System.out.println(ANSI_GREEN + "Thanks for rating." + ANSI_RESET);
                                                 }
@@ -645,9 +645,9 @@ public class CityLibrary{
      * @param num2
      * @return Calculated average rating
      */
-    public String avgRating(float num1, float num2){
+    public float avgRating(float num1, float num2){
         float avgRate = (num1 + num2)/(float) 2;
-        return String.format("%.1f", avgRate);
+        return Float.parseFloat(String.format("%.1f", avgRate));
     }
 
 }
