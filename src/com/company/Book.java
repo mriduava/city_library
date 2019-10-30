@@ -63,7 +63,7 @@ public class Book implements Comparable<Book>, Serializable {
     public String toString(){
         return "Title   : " + title.toUpperCase() +
                 "\nAuthor  : " + author.toUpperCase() +
-                "\nAvg Rate: " + rating +
+                "\nAvg Rate: " + String.format("%.1f", rating) +
                 "\nQuantity: " + quantity +
                 "\n-----------------------";
     }

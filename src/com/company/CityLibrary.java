@@ -373,7 +373,7 @@ public class CityLibrary{
                             System.out.println(ANSI_GREEN + "Hello " + name.toUpperCase() + " !" + ANSI_RESET);
                         }else {
                             isNumber = false;
-                            if (tryCount < 2){
+                            if (tryCount < 3){
                                 System.out.println(ANSI_PURPLE + "Pincode is wrong\nTry again..." + ANSI_RESET);
                                 tryCount++;
                             }else {
@@ -383,7 +383,7 @@ public class CityLibrary{
                         }
                     } else {
                         isNumber = false;
-                        if (tryCount < 2){
+                        if (tryCount < 3){
                             System.out.println(ANSI_RED + "Not a 4 digit number" + ANSI_RESET);
                             tryCount++;
                         }else {
@@ -391,7 +391,7 @@ public class CityLibrary{
                             tryCount++;
                         }
                     }
-                } while (!(isNumber) && tryCount<=2);
+                } while (!(isNumber) && tryCount<=3);
             }else {
                 System.out.println(ANSI_RED + "You're not a Subscriber\nPlease register" + ANSI_RESET);
             }
@@ -490,14 +490,18 @@ public class CityLibrary{
         }
     }
 
-    //RETURN BOOK
+    /**
+     * Function to return book.
+     * If the user is logged in by checking 'loginData' array, this function will proceed to
+     * the next step to work. Then it will search the 'borrowedBooks' array.
+     */
     public void returnBook(){
         if (!loginData.isEmpty()) {
             System.out.println("RETURN BOOK" +
                     "\n===========");
             Scanner input = new Scanner(System.in);
             String subscriberName = loginData.get(loginData.size() - 1);
-            boolean foundBook = false;
+            boolean existBook = false;
             try {
                 for (BorrowedBook borrowedBook : borrowedBooks) {
                     if ((borrowedBook.getName().toLowerCase()).equals(subscriberName.toLowerCase())) {
@@ -508,7 +512,7 @@ public class CityLibrary{
                             if ((borrowedBook2.getName().toLowerCase()).equals(subscriberName.toLowerCase()) && bookTitle.toLowerCase().equals(borrowedBook2.getTitle().toLowerCase())) {
                                 borrowedBooks.remove(borrowedBook2);
                                 System.out.println(ANSI_GREEN + bookTitle.toUpperCase() + " has been returned." + ANSI_RESET);
-                                foundBook = true;
+                                existBook = true;
                                 for (Book book : books) {
                                     if (book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())) {
                                         book.setQuantity(book.getQuantity() + 1);
@@ -543,7 +547,7 @@ public class CityLibrary{
                                 break;
                             }
                         }
-                        if (!foundBook) {
+                        if (!existBook) {
                             System.out.println(ANSI_PURPLE + "Yod did not borrow this book." + ANSI_RESET);
                             break;
                         }
@@ -621,7 +625,9 @@ public class CityLibrary{
     }
 
     /**
-     * To chek user login
+     * To check if the user is loggedin
+     * This function will serch the username in 'loginData' array which is filled by the 'usernames' while
+     * the users were logged in.
      */
     public void isLoggedIn(){
         if (!loginData.isEmpty()){
@@ -635,19 +641,16 @@ public class CityLibrary{
     }
 
     /**
-     * Function to take input as float number
-     * This function wil fist add the number in the Array, and
-     * then calculate the total.
-     * Finally the total will be divided by the size of the Array
-     * To fix a bug I've also counted number of zeros and subtracted it from the Array size,
-     * because I didn't want any zeros in the Array to calculate average rate.
-     * @param num1
-     * @param num2
+     * Function to take input as float numbers
+     * One number will get from the Book's object rating number, and another
+     * will assigned by the user input.
+     * @param num1 float number
+     * @param num2 float number
      * @return Calculated average rating
      */
     public float avgRating(float num1, float num2){
         float avgRate = (num1 + num2)/(float) 2;
-        return Float.parseFloat(String.format("%.1f", avgRate));
+        return avgRate;
     }
 
 }
