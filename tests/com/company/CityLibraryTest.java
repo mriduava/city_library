@@ -19,6 +19,7 @@ class CityLibraryTest {
         Book bookInfo = new Book(title, author, quantity, rating);
         books.add(bookInfo);
 
+        Assert.assertEquals(1, books.size());
         Assert.assertEquals(bookInfo, books.get(0));
     }
 

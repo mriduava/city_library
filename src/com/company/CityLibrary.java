@@ -4,15 +4,18 @@ import java.nio.file.*;
 import java.util.*;
 
 /**
- * <h1>Library Program</h1>
+ * <h1>Library Program.</h1>
  * <p>Admin and Subscribers as Users, where only Admin can add Books
- * and Subscriber can Borrow or Return Books.</p>
- * Users can see all available books and sort books by 'title' or 'author'.
- * If a subscriber borrow a book, the book's quantity will be subtracted,
- * and by returning back the quantity will be added again.
- * While returning back the book, subscribes can also add 'rating' which is a float
+ * and Subscriber can Borrow or Return Books.
+ * All users can see available books and sort books by 'title' or 'author'.
+ * Log in function has been added with this version. So, the subscriber must
+ * have to register or login to borrow books.
+ * If a subscriber borrows a book, the book's quantity will be subtracted,
+ * and by returning the book, the quantity will be added again.
+ * While returning the book, subscribes can also add 'rating' which is a float
  * number (0.1 to 5.0).  Rating book is optional, that means the user cna skip
- * that option just by pressing enter.
+ * that option just by pressing enter.</p>
+ *
  * @author Maruf Ahmed
  * @version 1.2.0
  * @since 2019.10.29
@@ -31,8 +34,8 @@ public class CityLibrary{
     private ArrayList<String> loginData = new ArrayList<>();
 
     /**
-     * CityLibrary constructor
-     * Takes the library name is parameter
+     * CityLibrary constructor.
+     * It takes the library name is parameter.
      */
     private String libraryName = "";
     public CityLibrary(String libraryName){
@@ -42,17 +45,16 @@ public class CityLibrary{
     /**
      * This function will display the Menu Items.
      * Each menu-item will call its specific function to execute by "switch" method.
-     * Before displaying menu-items this function calls other functions, for example
+     * Before displaying menu-items this function calls other functions, for example,
      * 'addBooksToArray' function will fill the 'books' array with pre-defined Book objects.
      *
-     * To avoid "NoSuchFileException", files are created before Menu-items' function executes.
-     * All files will be loaded at the beginning and will be saved before the Program shut down.
-     * So users can retrieve data after restart the program.
+     * To avoid getting "NoSuchFileException", files are created before 'switch' (menu-items)
+     * function executes.  All files will be loaded at the starting of the program, and will
+     * be saved before the program is closed. So, users can retrieve data after restart the program.
      */
     public void promptMenu() {
         System.out.println("====================================\n" +
              "* WELCOME TO " + libraryName + "  *");
-
 
         //To add books in the array
         displayBooks();
@@ -75,13 +77,12 @@ public class CityLibrary{
         borrowedBooks = brBooksFile;
         subscribers = subscribersFile;
 
-        //To display the user name who is recently logged in or has registered
-        isLoggedIn();
-
-        //To display menu items
+        //To display menu items.
         MainMenu.MenuItems menuItems;
         do {
+            //To display the user name who is recently logged in or has registered.
             isLoggedIn();
+
             menuItems = MainMenu.showMenuAndGetChoice();
             switch (menuItems) {
                 case ADMIN_REGISTRATION:
@@ -115,7 +116,7 @@ public class CityLibrary{
                     showAllBorrowedBooks();
                     break;
                 case EXIT:
-                    //All data will be saved before the program shut down
+                    //All data will be saved before the program shut down.
                     FileUtility.saveObject("books.ser", books);
                     FileUtility.saveObject("subscribers.ser", subscribers);
                     FileUtility.saveObject("br_books.ser", borrowedBooks);
@@ -126,8 +127,8 @@ public class CityLibrary{
     }
 
     /**
-     * Function to add Books in the books array
-     * This function will execute before displaying the menu-items
+     * Function to add Books in the books array.
+     * This function will execute before displaying the menu-items.
      */
     public void displayBooks(){
         Book emil = new Book("Emil", "Astrid Lindgren", 2, 0.0f);
@@ -142,8 +143,8 @@ public class CityLibrary{
     }
 
     /**
-     * Function to register Admin
-     * Maximum 2 Admins can be added, as it is predeclared as MAX_ADMINS=2
+     * Function to register Admin.
+     * Maximum 2 Admins can be added, as it is predeclared as MAX_ADMINS=2.
      * "Do-while" loop is used to force the user to enter a 4 digit number.
      * If admin registration is successful, it will print a welcome message.
      */
@@ -178,8 +179,8 @@ public class CityLibrary{
 
     /**
      * NOT USED
-     * Just to check if "registerAdmin" function works
-     * Function will print all registered Admins
+     * Just to check if "registerAdmin" function works.
+     * Function will print all registered Admins.
      */
     public void showAdmins(){
         for (int i = 0; i< admins.size(); i++){
@@ -241,7 +242,7 @@ public class CityLibrary{
 
     /**
      * To Print all the books from Array.
-     * "toString" method is used to print all the books
+     * To print all the books, "toString" method is used.
      */
     public void showBooks(){
         System.out.println("AVAILABLE BOOKS" +
@@ -288,7 +289,7 @@ public class CityLibrary{
     }
 
     /**
-     * Function to register subscribers
+     * Function to register subscribers.
      * Boolean function 'existUsername'  has been called here to avoid the
      * creation of multiple users with the same username.
      * It will also check if the pincode is a 4 digit number.
@@ -333,7 +334,7 @@ public class CityLibrary{
     }
 
     /**
-     * Function to login subscriber
+     * Function to login subscriber.
      * First it will search the username in 'subscribers' array. If it exists,
      * it will ask again to enter the pincode. If both username and pincode match
      * with the user input values, it will add the 'username' into the 'loginData'
@@ -413,6 +414,10 @@ public class CityLibrary{
      */
     public void borrowBook(){
         if (!loginData.isEmpty()) {
+            //Call this function here to display all the books again.
+            //Just to make the program user-friendly. (Thanks to Johan, as he suggested me.)
+            showBooks();
+
             System.out.println("BORROW BOOK" +
                     "\n===========");
             Scanner input = new Scanner(System.in);
@@ -429,7 +434,7 @@ public class CityLibrary{
                             BorrowedBook borrowedBook = new BorrowedBook(name, book.getTitle(), book.getAuthor(), book.getQuantity(), book.getRating());
                             if (!existBook(borrowedBook)) {
                                 borrowedBooks.add(borrowedBook);
-                                System.out.println("You've just borrowed " + bookTitle.toUpperCase());
+                                System.out.println(bookTitle.toUpperCase() + " is now borrowed.");
                                 book.setQuantity(book.getQuantity() - 1);
                                 break;
                             } else {
@@ -480,17 +485,29 @@ public class CityLibrary{
         }
     }
 
-    //RETURN BOOK
+    /**
+     * Function to return book.
+     * This function also works if the subscriber is log in. The whole process done
+     * by several steps. First, it will search only the book's title in the 'borrowedBooks'
+     * array. Secondly, it will compare the book's title and name with the 'logged in' subscriber's name
+     * and given book tile. If it validates, first the subscriber's book will be removed
+     * from 'borrowedBooks' array. Finally, it will search that book in the 'books' array &
+     * will add 1 in the book's quantity.
+     * Same arraylist has been looped thorough two times, as it was not working. The
+     * reason is unknown, needs to identify. May be it can be solved in different way.
+     */
     public void returnBook(){
         if (!loginData.isEmpty()) {
             System.out.println("RETURN BOOK" +
                     "\n===========");
             Scanner input = new Scanner(System.in);
             String subscriberName = loginData.get(loginData.size() - 1);
+            boolean foundSubscriber = false;
             boolean foundBook = false;
             try {
                 for (BorrowedBook borrowedBook : borrowedBooks) {
                     if ((borrowedBook.getName().toLowerCase()).equals(subscriberName.toLowerCase())) {
+                        foundSubscriber = true;
                         System.out.println("BOOK TITLE: ");
                         String bookTitle = input.nextLine();
 
@@ -542,13 +559,19 @@ public class CityLibrary{
             } catch (Exception e) {
                 //System.out.println(e);
             }
+            if (!foundSubscriber){
+                System.out.println("You have no books to return.");
+            }
         }else {
             System.out.println("TO RETURN BOOK..." +
                     "\nPlease Login or Register.");
         }
     }
 
-    //SHOW ALL BORROWED BOOKS
+    /**
+     * This function will print all the borrowed books by
+     * searching 'borrowedBooks' array.
+     */
     public void showAllBorrowedBooks(){
         System.out.println("ALL BORROWED BOOKS" +
                 "\n==================");
@@ -562,7 +585,7 @@ public class CityLibrary{
     }
 
     /**
-     * Search the username in the Array.
+     * Function to search the username in the Array.
      * This function was created to avoid the creation of
      * multiple users with the same username.
      * @param name String name
@@ -594,10 +617,10 @@ public class CityLibrary{
     }
 
     /**
-     * Check the book's existence in the array
-     * The function will take an Object as input
+     * Check the book's existence in the array.
+     * The function will take an Object as input.
      * It will compare with input object's 'title' and 'name' with
-     * 'borrowedBooks' object's 'title' and 'name'
+     * 'borrowedBooks' object's 'title' and 'name'.
      * @param borrowedBook Borrowed book object
      * @return true or false
      */
@@ -611,7 +634,9 @@ public class CityLibrary{
     }
 
     /**
-     * To chek user login
+     * To check if the user is logged in.
+     * When a subscriber login, the 'username' saved in the 'loginData' ArrayList.
+     * This function will loop through the array & take out the value of the last index of the Array.
      */
     public void isLoggedIn(){
         if (!loginData.isEmpty()){
@@ -623,11 +648,10 @@ public class CityLibrary{
     }
 
     /**
-     * Function to take input as float numbers
-     *
-     * then calculate the total.
-     * @param num1
-     * @param num2
+     * Function to take two inputs as float numbers and
+     * then calculate the average.
+     * @param num1 float number
+     * @param num2 float number
      * @return Calculated average rating
      */
     public float avgRating(float num1, float num2){
