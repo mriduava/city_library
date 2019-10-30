@@ -334,7 +334,7 @@ public class CityLibrary{
 
     /**
      * Function to login subscriber
-     * First it will search the username in subscribers array. If it exists,
+     * First it will search the username in 'subscribers' array. If it exists,
      * it will ask again to enter the pincode. If both username and pincode match
      * with the user input values, it will add the 'username' into the 'loginData'
      * array. And finally it will print a success message in console.
@@ -363,7 +363,7 @@ public class CityLibrary{
                         System.out.println("Hello " + name.toUpperCase() + " !");
                     }else {
                         isNumber = false;
-                        if (tryCount < 2){
+                        if (tryCount < 3){
                             System.out.println("Pincode is wrong\nTry again...");
                             tryCount++;
                         }else {
@@ -373,7 +373,7 @@ public class CityLibrary{
                     }
                 } else {
                     isNumber = false;
-                    if (tryCount < 2){
+                    if (tryCount < 3){
                         System.out.println("Not a 4 digit number");
                         tryCount++;
                     }else {
@@ -381,7 +381,7 @@ public class CityLibrary{
                         tryCount++;
                     }
                 }
-            } while (!(isNumber) && tryCount<=2);
+            } while (!(isNumber) && tryCount<=3);
         }else {
             System.out.println("You're not a Subscriber\nPlease register");
         }
