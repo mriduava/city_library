@@ -593,8 +593,6 @@ public class CityLibrary{
 
     /**
      * Search the Pin Code in the Array.
-     * This function was created to avoid the creation of
-     * multiple users with the same username.
      * @param pinCode String name
      * @return true or false
      */
