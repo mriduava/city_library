@@ -30,8 +30,12 @@ public class CityLibrary{
     private ArrayList<Subscriber> subscribers = new ArrayList<>();
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<BorrowedBook> borrowedBooks = new ArrayList<>();
-    private ArrayList<Float> rate = new ArrayList<>();
     private ArrayList<String> loginData = new ArrayList<>();
+
+
+    //Just to color the console text
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String YELLOW_BACKGROUND_BRIGHT = "\033[0;103m";
 
     /**
      * CityLibrary constructor.
@@ -54,7 +58,7 @@ public class CityLibrary{
      */
     public void promptMenu() {
         System.out.println("====================================\n" +
-             "* WELCOME TO " + libraryName + "  *");
+                "* WELCOME TO " + libraryName + "  *");
 
         //To add books in the array
         displayBooks();
@@ -247,9 +251,10 @@ public class CityLibrary{
     public void showBooks(){
         System.out.println("AVAILABLE BOOKS" +
                 "\n===============");
-        for (Book book: books){
+        /*for (Book book: books){
             System.out.println(book);
-        }
+        }*/
+        printArrayList(books);
     }
 
     /**
@@ -347,61 +352,6 @@ public class CityLibrary{
                 "\n================");
         Scanner scan = new Scanner(System.in);
         String name, id;
-<<<<<<< HEAD
-            System.out.println("ENTER THE USERNAME: ");
-            name = scan.nextLine();
-            if (existUsername(name)){
-                boolean isNumber;
-                int tryCount = 1;
-                do {
-                    System.out.println("PIN CODE (4 digit): ");
-                    String regex = "\\d+";
-                    id = scan.nextLine();
-                    if (id.length() == 4 && id.matches(regex)) {
-                        int id2 = Integer.parseInt(id);
-                        if (existUser(name, id2)){
-                            isNumber = true;
-                            loginData.add(name);
-                            System.out.println(ANSI_GREEN + "Hello " + name.toUpperCase() + " !" + ANSI_RESET);
-                        }else {
-                            isNumber = false;
-                            if (tryCount < 3){
-                                System.out.println(ANSI_PURPLE + "Pincode is wrong\nTry again..." + ANSI_RESET);
-                                tryCount++;
-                            }else {
-                                System.out.println(ANSI_PURPLE + "Sorry! Try later..." + ANSI_RESET);
-                                tryCount++;
-                            }
-                        }
-                    } else {
-||||||| merged common ancestors
-            System.out.println("ENTER THE USERNAME: ");
-            name = scan.nextLine();
-            if (existUsername(name)){
-                boolean isNumber;
-                int tryCount = 1;
-                do {
-                    System.out.println("PIN CODE (4 digit): ");
-                    String regex = "\\d+";
-                    id = scan.nextLine();
-                    if (id.length() == 4 && id.matches(regex)) {
-                        int id2 = Integer.parseInt(id);
-                        if (existUser(name, id2)){
-                            isNumber = true;
-                            loginData.add(name);
-                            System.out.println(ANSI_GREEN + "Hello " + name.toUpperCase() + " !" + ANSI_RESET);
-                        }else {
-                            isNumber = false;
-                            if (tryCount < 2){
-                                System.out.println(ANSI_PURPLE + "Pincode is wrong\nTry again..." + ANSI_RESET);
-                                tryCount++;
-                            }else {
-                                System.out.println(ANSI_PURPLE + "Sorry! Try later..." + ANSI_RESET);
-                                tryCount++;
-                            }
-                        }
-                    } else {
-=======
         System.out.println("ENTER THE USERNAME: ");
         name = scan.nextLine();
         if (existUsername(name)){
@@ -418,35 +368,15 @@ public class CityLibrary{
                         loginData.add(name);
                         System.out.println("Hello " + name.toUpperCase() + " !");
                     }else {
->>>>>>> master
                         isNumber = false;
-<<<<<<< HEAD
-                        if (tryCount < 3){
-                            System.out.println(ANSI_RED + "Not a 4 digit number" + ANSI_RESET);
-||||||| merged common ancestors
-                        if (tryCount < 2){
-                            System.out.println(ANSI_RED + "Not a 4 digit number" + ANSI_RESET);
-=======
                         if (tryCount < 3){
                             System.out.println("Pincode is wrong\nTry again...");
->>>>>>> master
                             tryCount++;
                         }else {
                             System.out.println("Sorry! Try later...");
                             tryCount++;
                         }
                     }
-<<<<<<< HEAD
-                } while (!(isNumber) && tryCount<=3);
-            }else {
-                System.out.println(ANSI_RED + "You're not a Subscriber\nPlease register" + ANSI_RESET);
-            }
-||||||| merged common ancestors
-                } while (!(isNumber) && tryCount<=2);
-            }else {
-                System.out.println(ANSI_RED + "You're not a Subscriber\nPlease register" + ANSI_RESET);
-            }
-=======
                 } else {
                     isNumber = false;
                     if (tryCount < 3){
@@ -461,7 +391,6 @@ public class CityLibrary{
         }else {
             System.out.println("You're not a Subscriber\nPlease register");
         }
->>>>>>> master
     }
 
     /**
@@ -544,7 +473,7 @@ public class CityLibrary{
         if (!loginData.isEmpty()) {
             System.out.println("MY BORROWED BOOKS" +
                     "\n=================");
-            String subscriberName = loginData.get(loginData.size()-1);
+            /*String subscriberName = loginData.get(loginData.size()-1);
             boolean found = false;
             for (BorrowedBook borrowedBooks : borrowedBooks) {
                 if ((borrowedBooks.getName().toLowerCase()).equals(subscriberName.toLowerCase())) {
@@ -554,22 +483,14 @@ public class CityLibrary{
             }
             if (!found){
                 System.out.println("You've no borrowed books");
-            }
+            }*/
+            printArray(borrowedBooks);
         }else {
             System.out.println("TO SEE YOUR BORROWED BOOKS..." +
-                   "\nPlease Login or Register.");
+                    "\nPlease Login or Register.");
         }
     }
 
-<<<<<<< HEAD
-    /**
-     * Function to return book.
-     * If the user is logged in by checking 'loginData' array, this function will proceed to
-     * the next step to work. Then it will search the 'borrowedBooks' array.
-     */
-||||||| merged common ancestors
-    //RETURN BOOK
-=======
     /**
      * Function to return book.
      * This function also works if the subscriber is log in. The whole process done
@@ -581,21 +502,28 @@ public class CityLibrary{
      * Same arraylist has been looped thorough two times, as it was not working. The
      * reason is unknown, needs to identify. May be it can be solved in different way.
      */
->>>>>>> master
     public void returnBook(){
+
         if (!loginData.isEmpty()) {
+            String subscriberName = loginData.get(loginData.size()-1);
+            boolean found = false;
+            for (BorrowedBook borrowedBooks : borrowedBooks) {
+                if ((borrowedBooks.getName().toLowerCase()).equals(subscriberName.toLowerCase())) {
+                    found = true;
+                    System.out.println(borrowedBooks);
+
+                }
+            }
+            /*if (found){
+                System.out.println("YOUR BORROWED BOOKS" +
+                                 "\n===================");
+            }*/
             System.out.println("RETURN BOOK" +
                     "\n===========");
             Scanner input = new Scanner(System.in);
-            String subscriberName = loginData.get(loginData.size() - 1);
-<<<<<<< HEAD
-            boolean existBook = false;
-||||||| merged common ancestors
-            boolean foundBook = false;
-=======
+           // String subscriberName = loginData.get(loginData.size() - 1);
             boolean foundSubscriber = false;
             boolean foundBook = false;
->>>>>>> master
             try {
                 for (BorrowedBook borrowedBook : borrowedBooks) {
                     if ((borrowedBook.getName().toLowerCase()).equals(subscriberName.toLowerCase())) {
@@ -606,16 +534,8 @@ public class CityLibrary{
                         for (BorrowedBook borrowedBook2 : borrowedBooks) {
                             if ((borrowedBook2.getName().toLowerCase()).equals(subscriberName.toLowerCase()) && bookTitle.toLowerCase().equals(borrowedBook2.getTitle().toLowerCase())) {
                                 borrowedBooks.remove(borrowedBook2);
-<<<<<<< HEAD
-                                System.out.println(ANSI_GREEN + bookTitle.toUpperCase() + " has been returned." + ANSI_RESET);
-                                existBook = true;
-||||||| merged common ancestors
-                                System.out.println(ANSI_GREEN + bookTitle.toUpperCase() + " has been returned." + ANSI_RESET);
-                                foundBook = true;
-=======
                                 System.out.println(bookTitle.toUpperCase() + " has been returned.");
                                 foundBook = true;
->>>>>>> master
                                 for (Book book : books) {
                                     if (book.getTitle().toLowerCase().equals(bookTitle.toLowerCase())) {
                                         book.setQuantity(book.getQuantity() + 1);
@@ -650,16 +570,8 @@ public class CityLibrary{
                                 break;
                             }
                         }
-<<<<<<< HEAD
-                        if (!existBook) {
-                            System.out.println(ANSI_PURPLE + "Yod did not borrow this book." + ANSI_RESET);
-||||||| merged common ancestors
-                        if (!foundBook) {
-                            System.out.println(ANSI_PURPLE + "Yod did not borrow this book." + ANSI_RESET);
-=======
                         if (!foundBook) {
                             System.out.println("Yod did not borrow this book.");
->>>>>>> master
                             break;
                         }
                     }
@@ -686,9 +598,10 @@ public class CityLibrary{
         if (borrowedBooks.size() == 0){
             System.out.println("Nobody borrowed any books");
         }else {
-            for (BorrowedBook borrowedBook : borrowedBooks) {
+            /*for (BorrowedBook borrowedBook : borrowedBooks) {
                 System.out.println(borrowedBook);
-            }
+            }*/
+            printArrayList(borrowedBooks);
         }
     }
 
@@ -710,6 +623,8 @@ public class CityLibrary{
 
     /**
      * Search the Pin Code in the Array.
+     * This function was created to avoid the creation of
+     * multiple users with the same username.
      * @param pinCode String name
      * @return true or false
      */
@@ -740,54 +655,51 @@ public class CityLibrary{
     }
 
     /**
-<<<<<<< HEAD
-     * To check if the user is loggedin
-     * This function will serch the username in 'loginData' array which is filled by the 'usernames' while
-     * the users were logged in.
-||||||| merged common ancestors
-     * To chek user login
-=======
      * To check if the user is logged in.
      * When a subscriber login, the 'username' saved in the 'loginData' ArrayList.
      * This function will loop through the array & take out the value of the last index of the Array.
->>>>>>> master
      */
     public void isLoggedIn(){
         if (!loginData.isEmpty()){
             for (int i=0; i<loginData.size(); i++){
-                System.out.println(">> Login as " + loginData.get(loginData.size()-1).toUpperCase() + "  ");
+                System.out.println(YELLOW_BACKGROUND_BRIGHT + ">> Login as " + loginData.get(loginData.size()-1).toUpperCase() + "  " + ANSI_RESET);
                 break;
             }
         }
     }
 
     /**
-<<<<<<< HEAD
-     * Function to take input as float numbers
-     * One number will get from the Book's object rating number, and another
-     * will assigned by the user input.
-     * @param num1 float number
-     * @param num2 float number
-||||||| merged common ancestors
-     * Function to take input as float number
-     * This function wil fist add the number in the Array, and
-     * then calculate the total.
-     * Finally the total will be divided by the size of the Array
-     * To fix a bug I've also counted number of zeros and subtracted it from the Array size,
-     * because I didn't want any zeros in the Array to calculate average rate.
-     * @param num1
-     * @param num2
-=======
      * Function to take two inputs as float numbers and
      * then calculate the average.
      * @param num1 float number
      * @param num2 float number
->>>>>>> master
      * @return Calculated average rating
      */
     public float avgRating(float num1, float num2){
         float avgRate = (num1 + num2)/(float) 2;
         return avgRate;
+    }
+
+    public <E extends HasGetName> void printArray(ArrayList<E> arrayList){
+        if (!loginData.isEmpty()) {
+            String subscriberName = loginData.get(loginData.size() - 1);
+            boolean found = false;
+            for (E element : arrayList) {
+                if ((element.getName().toLowerCase()).equals(subscriberName.toLowerCase())) {
+                    found = true;
+                    System.out.println(element);
+                }
+            }
+            if (!found) {
+                System.out.println("You've no borrowed books");
+            }
+        }
+    }
+
+    public <E> void printArrayList(ArrayList<E> arrayList){
+        for (E element : arrayList) {
+            System.out.println(element);
+        }
     }
 
 }

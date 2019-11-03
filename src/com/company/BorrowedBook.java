@@ -2,7 +2,7 @@ package com.company;
 
 import java.io.Serializable;
 
-public class BorrowedBook extends Book implements Serializable {
+public class BorrowedBook extends Book implements Serializable, HasGetName {
 
     private String name;
     public BorrowedBook(String name, String title, String author, int quantity, float rating){
